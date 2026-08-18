@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0a87bd">
+  <title>Aeropuerto de Guayaquil | Vuelos</title>
+  <meta name="description" content="Consulta salidas, llegadas y estados de vuelos del Aeropuerto de Guayaquil GYE.">
+  <link rel="canonical" href="https://aeropuertogye.com/">
+  <meta property="og:title" content="Aeropuerto GYE | Vuelos de Guayaquil">
+  <meta property="og:description" content="Consulta salidas, llegadas y estados de vuelos de Guayaquil.">
+  <meta property="og:url" content="https://aeropuertogye.com/">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="interactive.css">
+</head>
+<body>
+  <header class="header">
+    <a class="brand" href="#inicio" aria-label="Aeropuerto de Guayaquil, inicio"><img class="brand-logo" src="assets/logo-aeropuerto-guayaquil.png" alt="Aeropuerto de Guayaquil José Joaquín de Olmedo"></a>
+    <button class="language-toggle" id="languageToggle" aria-label="Switch to English">EN</button>
+  </header>
+
+  <main id="inicio">
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow" data-i18n="heroEyebrow">INFORMACIÓN OPERATIVA · GYE / SEGU</p>
+        <h1><span data-i18n="heroTitle">Aeropuerto Internacional José Joaquín de Olmedo</span></h1>
+        <p class="hero-text" data-i18n="heroText">Consulta salidas, llegadas y estados de vuelos del Aeropuerto Internacional José Joaquín de Olmedo.</p>
+      </div>
+      <div class="sun"></div><div class="plane" aria-hidden="true">✈</div>
+      <section class="search-card" aria-label="Buscador de vuelos">
+        <div class="tabs" role="tablist">
+          <button class="tab active" data-type="departure" data-i18n="departuresTab">↗ Salidas desde Guayaquil (GYE)</button>
+          <button class="tab" data-type="arrival" data-i18n="arrivalsTab">↙ Llegadas a Guayaquil (GYE)</button>
+        </div>
+        <div class="search-row"><label><span>⌕</span><input id="search" type="search" placeholder="Vuelo, destino o aerolínea" aria-label="Buscar vuelo" data-i18n-placeholder="searchPlaceholder"></label><button id="searchBtn"><span data-i18n="searchButton">Buscar</span> <span>→</span></button></div>
+      </section>
+    </section>
+
+    <section class="flights-section" id="vuelos">
+      <div class="section-head"><div><p class="eyebrow blue" data-i18n="boardEyebrow">OPERACIÓN AEROPORTUARIA</p><h2 data-i18n="boardTitle">Salidas</h2></div><div class="live"><i></i><span data-i18n="localTime">HORA LOCAL</span><b id="clock">--:--:--</b></div></div>
+      <div class="api-bar" id="apiBar"><div><b id="sourceState">Fuente sin conectar</b><span id="sourceDetail">Conecta AirLabs para cargar vuelos reales de GYE.</span></div><div><button class="secondary-btn" id="refreshFlights" hidden data-i18n="refresh">↻ Actualizar</button><button class="primary-btn" id="configureApi">Conectar datos reales</button></div></div>
+      <div class="flight-board" id="flightBoard" aria-live="polite"></div>
+      <div class="empty" id="empty" hidden><span>✈</span><h3 data-i18n="notFound">No encontramos ese vuelo</h3><p data-i18n="notFoundHelp">Prueba con otro número, destino o aerolínea.</p></div>
+      <div class="board-footer"><span><span data-i18n="lastQuery">Última consulta:</span> <b id="lastUpdate">Sin conexión</b></span><button id="showAll" hidden>Ver todas las salidas →</button></div>
+    </section>
+
+    <section class="services" id="servicios">
+      <article class="service-intro"><p class="eyebrow" data-i18n="passengerInfo">INFORMACIÓN AL PASAJERO</p><h2 data-i18n="terminalServices">Servicios de<br>la terminal.</h2><p data-i18n="servicesText">Información práctica para facilitar tu paso por el aeropuerto.</p><button class="service-link" data-info="services" data-i18n="viewServices">Ver servicios →</button></article>
+      <button class="service yellow" data-info="wifi"><span class="service-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 8.7a14.6 14.6 0 0 1 18 0M6.2 12.1a9.6 9.6 0 0 1 11.6 0M9.5 15.5a4.6 4.6 0 0 1 5 0"/><circle cx="12" cy="19" r="1.3"/></svg></span><span><small data-i18n="connection">CONEXIÓN</small><strong data-i18n="connectivity">Conectividad</strong><em data-i18n="connectivityText">Internet y telefonía.</em></span><b>→</b></button>
+      <button class="service pale" id="transporte" data-info="transport"><span class="service-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 10c0 5.2-8 11-8 11S4 15.2 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.7"/></svg></span><span><small data-i18n="transport">TRANSPORTE</small><strong data-i18n="gettingHere">Cómo llegar</strong><em data-i18n="transportText">Taxi, vans y estacionamiento.</em></span><b>→</b></button>
+    </section>
+  </main>
+  <footer><b>GYE · José Joaquín de Olmedo</b><span data-i18n="welcome">Guayaquil te da la bienvenida.</span><span data-i18n="dataNotice">Datos: AirLabs · Sitio no oficial</span></footer>
+  <dialog class="modal" id="apiModal"><form method="dialog"><button class="modal-close" value="cancel" aria-label="Cerrar">×</button><p class="eyebrow blue" data-i18n="connection">CONEXIÓN</p><h2 data-i18n="connectTitle">Conectar vuelos reales</h2><p data-i18n="connectDescription">Ingresa tu clave gratuita de AirLabs. Se conserva únicamente durante esta sesión.</p><label class="api-field"><span data-i18n="apiKey">Clave de API</span><input id="apiKey" type="password" autocomplete="off" placeholder="Tu API key" data-i18n-placeholder="apiPlaceholder"></label><p class="helper" data-i18n="apiHelp">La app consultará únicamente vuelos con salida desde Guayaquil (GYE). Para publicar el sitio, protege la clave mediante un servidor.</p><div class="modal-actions"><a href="https://airlabs.co/signup" target="_blank" rel="noopener" data-i18n="getKey">Obtener clave gratis</a><button class="primary-btn" id="saveApi" value="cancel" data-i18n="connect">Conectar</button></div></form></dialog>
+  <dialog class="modal" id="infoModal"><div><button class="modal-close" id="closeInfo" aria-label="Cerrar">×</button><p class="eyebrow blue" id="infoLabel">INFORMACIÓN</p><h2 id="infoTitle"></h2><div class="info-content" id="infoContent"></div></div></dialog>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="app.js"></script>
+</body>
+</html>
